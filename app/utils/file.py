@@ -50,4 +50,4 @@ async def remove_file(path: str):
     dirname = os.path.dirname(path)
 
     if not os.listdir(dirname):
-        os.rmdir(dirname)  
+        os.rmdir(dirname)
