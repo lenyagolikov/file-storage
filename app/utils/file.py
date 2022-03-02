@@ -20,21 +20,21 @@ async def write_and_hashing_file(file: UploadFile) -> str:
             md5.update(data)
             await f.write(data)
 
-    filehash = md5.hexdigest()
+    hash = md5.hexdigest()
 
-    os.makedirs(os.path.join(SOURCE, await get_short_hash(filehash)))
-    os.replace(path, await get_file_path(filehash))
+    os.makedirs(os.path.join(SOURCE, await get_short_hash(hash)), exist_ok=True)
+    os.replace(path, await get_file_path(hash))
 
-    return filehash
-
-
-async def get_short_hash(filehash: str) -> str:
-    return filehash[:2]
+    return hash
 
 
-async def get_file_path(filehash: str) -> str:
-    dir = await get_short_hash(filehash)
-    return os.path.join(SOURCE, dir, filehash)
+async def get_short_hash(hash: str) -> str:
+    return hash[:2]
+
+
+async def get_file_path(hash: str) -> str:
+    dir = await get_short_hash(hash)
+    return os.path.join(SOURCE, dir, hash)
 
 
 async def file_exist(path: str) -> bool:
