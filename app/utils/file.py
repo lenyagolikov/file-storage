@@ -9,6 +9,7 @@ SOURCE = "store"
 
 
 async def write_and_hashing_file(file: UploadFile) -> str:
+    """Хешируется сам контент файла, а не название. Для экономии - делается параллельно с записью"""
     md5 = hashlib.md5()
     path = os.path.join(SOURCE, file.filename)
 
