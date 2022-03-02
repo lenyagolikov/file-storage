@@ -37,11 +37,17 @@ async def get_file_path(hash: str) -> str:
     return os.path.join(SOURCE, dir, hash)
 
 
-async def file_exist(path: str) -> bool:
+async def is_file_exist(path: str) -> bool:
     if os.path.exists(path):
         return True
     return False
 
 
 async def remove_file(path: str):
+    """Удаляет файл. Если директория пустая - удаляет еще и директорию"""
     os.remove(path)
+
+    dirname = os.path.dirname(path)
+
+    if not os.listdir(dirname):
+        os.rmdir(dirname)  

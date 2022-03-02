@@ -10,7 +10,7 @@ router = APIRouter()
 async def download_file(hash: str):
     path = await utils.get_file_path(hash)
 
-    if not await utils.file_exist(path):
+    if not await utils.is_file_exist(path):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="file not found")
 
     return path
@@ -25,7 +25,7 @@ async def upload_file(file: UploadFile):
 async def delete_file(hash: str):
     path = await utils.get_file_path(hash)
 
-    if not await utils.file_exist(path):
+    if not await utils.is_file_exist(path):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="file not found")
 
     await utils.remove_file(path)
