@@ -1,0 +1,10 @@
+[run]
+branch = True
+source = src
+omit = *__init__.py, *__main__.py, *main.py, *config.py, *init_db.py, *api.py, *alembic*
+
+[report]
+omit = *__init__.py, *__main__.py, *main.py, *config.py, *init_db.py,  *api.py, *alembic*
+
+[html]
+directory = ./htmlcov
